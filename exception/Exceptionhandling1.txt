@@ -1,0 +1,129 @@
+//Program to demonstrate handling runtime exception
+import java.util.Scanner;
+public class HandlingRuntimeException {
+
+	public static void divide(int x, int y) {
+		int z = 0;
+		try {
+			z = x / y;
+			System.out.println("Result of division is z: " + z);
+		} catch (ArithmeticException np) {
+			System.err.println("A number cannot be divided by zero");
+		}
+	}
+
+	public static void divide(float x, float y) {
+		float z = 0;
+		z = x / y;
+		System.out.println("Result of division is z: " + z);
+	}
+
+	public static void main(String[] args) {
+		int x, y, z;
+		Scanner sc = new Scanner(System.in);
+		
+		// Apply try-catch block to handle runtime exception.
+		try {
+			System.out.println("I am in try block");
+			System.out.println("Enter two numbers ");
+			x = Integer.parseInt(sc.nextLine());// runtime exception.
+			y = Integer.parseInt(sc.nextLine());// runtime exception.
+			divide(x,y); 	
+		} catch (Exception ae) {
+			System.err.println("Error!, Invalid Input : " + ae.getMessage());
+		}		
+		sc.close();	
+		divide(12.0f, 0f);
+	}
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//Program to demonstrate Finally block
+import java.util.Scanner;
+public class FinallyBlock {
+	public static void divide(int x, int y) {
+		int z = 0;
+		try {
+			z = x / y;
+			System.out.println("Result of division is z: " + z);
+		} catch (ArithmeticException np) {
+			System.err.println("A number cannot be divided by zero");
+		}
+	}
+	public static void main(String[] args) {
+		int x, y;
+		Scanner sc = new Scanner(System.in);
+		
+		// Apply try-catch block to handle runtime exception.
+		try {
+			System.out.println("I am in try block");
+			System.out.println("Enter two numbers ");
+			x = Integer.parseInt(sc.nextLine());// runtime exception.
+			y = Integer.parseInt(sc.nextLine());// runtime exception.
+			divide(x, y);
+
+		} catch (Exception ae) {
+			System.err.println("Error!, Invalid Input : " + ae.getMessage());
+		} finally {
+			System.out.println("In Finally block");
+		}
+
+		sc.close();
+
+	}
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//Program to demonstrate Multiple catch block
+public class MultipleCatchEx {
+
+	public static int divide(int x, int y) {
+		int z = 0;
+
+		z = x / y;
+		System.out.println("Result of division is z: " + z);
+
+		return z;
+	}
+	public static void main(String[] args) {
+		int x, y, z;
+
+		try {
+			x = Integer.parseInt(args[0]); // command line args
+			y = Integer.parseInt(args[1]);
+			z = divide(x, y);
+			System.out.println("z = " + z);
+		} catch (ArithmeticException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
+			System.err.println("Error! " + e.getMessage());
+		} catch (Exception e) {
+			System.err.println("Error......" + e.getMessage());
+		}
+		System.out.println("Out of try-catch block");
+	}
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//Program to demonstrate Nested Try Block
+public class NestedTryBlockEx {
+	public static int divide(int x, int y) {
+		int z = 0;
+		z = x / y;
+		System.out.println("Result of division is z: " + z);
+		return z;
+	}
+
+	public static void main(String[] args) {
+		int x, y, z;
+		try {
+			x = Integer.parseInt(args[0]); // command line args
+			y = Integer.parseInt(args[1]);
+			try {
+				z = divide(x, y);
+			} catch (ArithmeticException ae) {
+				System.err.println("Error! A number cannot be divided by 0");
+			}
+		} catch (NumberFormatException e) {
+			System.err.println("Error! Invalid input, number must be an integer.");
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.err.println("Error! please pass numbers ");
+		}
+		System.out.println("I am out of outer catch block");
+	}
+}
