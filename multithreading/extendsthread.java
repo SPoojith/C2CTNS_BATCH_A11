@@ -1,6 +1,4 @@
 package multithreading;
-
-
 class numberprint extends Thread{
     public void run(){
         System.out.println("character printing started");
